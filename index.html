@@ -1,56 +1,37 @@
-<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <title>Rasa Cyber-Matrix Chat</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rasa Cyber-Matrix Login</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        /* Global Cyberpunk Variables for easy customization */
         :root {
-            /* Dark Theme Colors (Default) */
-            --cyber-dark-bg: #0d0d0d; /* Deep dark background */
-            --cyber-panel-bg: #111;   /* Slightly lighter dark for panels */
-            --cyber-neon-blue: #00ffff; /* Primary neon blue */
-            --cyber-neon-magenta: #ff00ff; /* Primary neon magenta */
-            --cyber-user-gradient-start: #00ffff; /* User message gradient start */
-            --cyber-user-gradient-end: #0077ff;   /* User message gradient end */
-            --cyber-bot-gradient-start: #ff00ff; /* Bot message gradient start */
-            --cyber-bot-gradient-end: #ff0066;   /* Bot message gradient end */
-            --cyber-text-light: #fff; /* Light text color for contrast */
-            --cyber-text-dark: #000;  /* Dark text color for light backgrounds */
-            --cyber-shadow-blur-sm: 10px; /* Small shadow blur for general glow */
-            --cyber-shadow-blur-md: 15px; /* Medium shadow blur */
-            --cyber-shadow-blur-lg: 30px; /* Large shadow blur for intense glow */
-
-            /* Light Theme Colors (when .light class is active) */
-            --light-bg: #f0f0f0; /* Light background */
-            --light-panel-bg: #ffffff; /* White panel background */
-            --light-text-color: #333333; /* Dark text for light theme */
-            --light-border-color: #bbbbbb; /* Grey border for light theme */
-            --light-user-bg: #cfe2ff; /* Light blue for user message */
-            --light-bot-bg: #e2e3e5; /* Light grey for bot message */
-            --light-shadow-color: rgba(0, 0, 0, 0.1);
+            --cyber-dark-bg: #0d0d0d;
+            --cyber-panel-bg: #111;
+            --cyber-neon-blue: #00ffff;
+            --cyber-neon-magenta: #ff00ff;
+            --cyber-text-light: #fff;
+            --cyber-text-dark: #000;
+            --cyber-shadow-blur-sm: 10px;
+            --cyber-shadow-blur-md: 15px;
+            --cyber-shadow-blur-lg: 30px;
         }
 
-        /* --- Base & Body Styles --- */
         body {
-            font-family: 'Orbitron', sans-serif; /* Futuristic font */
+            font-family: 'Orbitron', sans-serif;
             background-color: var(--cyber-dark-bg);
-            color: var(--cyber-neon-blue); /* Default text color */
-            margin: 0 auto;
-            padding: 20px;
-            max-width: 650px;
-            border: 2px solid var(--cyber-neon-blue);
-            border-radius: 12px;
-            box-shadow: 0 0 var(--cyber-shadow-blur-md) var(--cyber-neon-blue),
-                        0 0 var(--cyber-shadow-blur-lg) rgba(0,255,255,0.3);
-            position: relative;
+            color: var(--cyber-neon-blue);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
             overflow: hidden;
-            transition: all 0.3s ease-in-out;
+            position: relative;
         }
 
-        /* Subtle background grid pattern */
         body::before {
             content: '';
             position: absolute;
@@ -64,955 +45,231 @@
             background-size: 25px 25px;
             z-index: -1;
             opacity: 0.15;
-            transition: opacity 0.3s ease-in-out;
         }
 
-        /* --- Light Theme Overrides --- */
-        body.light {
-            background-color: var(--light-bg);
-            color: var(--light-text-color);
-            border-color: var(--light-border-color);
-            box-shadow: 0 0 10px var(--light-shadow-color);
-        }
-
-        body.light::before {
-            opacity: 0.05;
-            background-image:
-                linear-gradient(0deg, transparent 97%, rgba(0,0,0,0.02) 97%),
-                linear-gradient(90deg, transparent 97%, rgba(0,0,0,0.02) 97%);
-        }
-
-        /* --- Heading Style --- */
-        h2 {
-            text-align: center;
-            color: var(--cyber-neon-magenta);
-            text-shadow: 0 0 var(--cyber-shadow-blur-md) var(--cyber-neon-magenta);
-            font-size: 32px;
-            margin-bottom: 25px;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            animation: pulse-glow 2s infinite alternate;
-            transition: all 0.3s ease-in-out;
-        }
-
-        @keyframes pulse-glow {
-            from { text-shadow: 0 0 8px var(--cyber-neon-magenta), 0 0 15px rgba(255,0,255,0.5); }
-            to { text-shadow: 0 0 12px var(--cyber-neon-magenta), 0 0 25px rgba(255,0,255,0.7); }
-        }
-
-        body.light h2 {
-            color: var(--light-text-color);
-            text-shadow: none;
-            animation: none;
-        }
-
-
-        /* --- Chat Window --- */
-        #chat {
+        .login-container {
             background-color: var(--cyber-panel-bg);
-            border: 2px solid var(--cyber-neon-blue);
-            border-radius: 10px;
-            padding: 20px;
-            height: 450px;
-            overflow-y: auto;
-            margin-bottom: 20px;
-            box-shadow: inset 0 0 var(--cyber-shadow-blur-sm) var(--cyber-neon-blue),
-                        inset 0 0 var(--cyber-shadow-blur-md) rgba(0,255,255,0.2);
-            /* *** CHANGE START *** */
-            display: flex;
-            flex-direction: column;
-            /* align-items: flex-start; /* Default for messages starting from left */
-            gap: 15px;
-            /* *** CHANGE END *** */
-            transition: all 0.3s ease-in-out;
-        }
-
-        body.light #chat {
-            background-color: var(--light-panel-bg);
-            border-color: var(--light-border-color);
-            box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.05);
-        }
-
-        /* Custom Scrollbar Styles */
-        #chat::-webkit-scrollbar {
-            width: 10px;
-        }
-        #chat::-webkit-scrollbar-track {
-            background: var(--cyber-panel-bg);
-            border-radius: 10px;
-            transition: background 0.3s ease-in-out;
-        }
-        #chat::-webkit-scrollbar-thumb {
-            background: var(--cyber-neon-blue);
-            border-radius: 10px;
-            border: 2px solid var(--cyber-panel-bg);
-            transition: all 0.3s ease-in-out;
-        }
-        #chat::-webkit-scrollbar-thumb:hover {
-            background: var(--cyber-neon-magenta);
-            box-shadow: 0 0 5px var(--cyber-neon-magenta);
-        }
-
-        body.light #chat::-webkit-scrollbar-track {
-            background: var(--light-panel-bg);
-        }
-        body.light #chat::-webkit-scrollbar-thumb {
-            background: #a0a0a0;
-            border-color: var(--light-panel-bg);
-        }
-        body.light #chat::-webkit-scrollbar-thumb:hover {
-            background: #808080;
-            box-shadow: none;
-        }
-
-        /* --- Message Bubbles --- */
-        .message {
-            padding: 12px 20px;
-            border-radius: 25px;
-            max-width: 70%;
-            word-wrap: break-word;
-            /* *** CHANGE START *** */
-            /* Removed clear: both; and float: left/right; */
-            display: inline-flex; /* Changed from block to inline-flex to make it hug content */
-            align-items: center; /* Vertically center content if multi-line */
-            /* *** CHANGE END *** */
-            font-size: 16px;
-            line-height: 1.5;
-            animation: fadeInMessage 0.3s ease-out;
-            transition: all 0.3s ease-in-out;
-        }
-
-        @keyframes fadeInMessage {
-            from { opacity: 0; transform: translateY(15px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .user {
-            background: linear-gradient(135deg, var(--cyber-user-gradient-start), var(--cyber-user-gradient-end));
-            color: var(--cyber-text-dark);
-            /* *** CHANGE START *** */
-            margin-left: auto; /* Pushes element to the right when in a flex container */
-            /* Removed float: right; */
-            /* *** CHANGE END *** */
-            border-bottom-right-radius: 5px;
-            box-shadow: 0 0 var(--cyber-shadow-blur-sm) var(--cyber-neon-blue);
-        }
-
-        body.light .user {
-            background: var(--light-user-bg);
-            color: var(--light-text-color);
-            box-shadow: 0 2px 5px var(--light-shadow-color);
-        }
-
-        .bot {
-            background: linear-gradient(135deg, var(--cyber-bot-gradient-start), var(--cyber-bot-gradient-end));
-            color: var(--cyber-text-light);
-            /* *** CHANGE START *** */
-            margin-right: auto; /* Pushes element to the left when in a flex container */
-            /* Removed float: left; */
-            /* *** CHANGE END *** */
-            border-bottom-left-radius: 5px;
-            box-shadow: 0 0 var(--cyber-shadow-blur-sm) var(--cyber-neon-magenta),
-                        0 0 var(--cyber-shadow-blur-md) rgba(255,0,255,0.4);
-            animation: flicker 1.2s infinite alternate;
-        }
-
-        body.light .bot {
-            background: var(--light-bot-bg);
-            color: var(--light-text-color);
-            box-shadow: 0 2px 5px var(--light-shadow-color);
-            animation: none;
-        }
-
-        /* Flicker Animation for Bot Messages */
-        @keyframes flicker {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            20%, 80% { opacity: 0.95; transform: scale(0.99); }
-            40%, 60% { opacity: 1; transform: scale(1.01); }
-        }
-
-        /* --- Input Form --- */
-        #inputForm {
-            display: flex;
-            gap: 12px;
-        }
-
-        #inputMessage {
-            flex: 1;
-            padding: 15px;
-            border-radius: 30px;
-            border: 2px solid var(--cyber-neon-blue);
-            background-color: var(--cyber-panel-bg);
-            color: var(--cyber-neon-blue);
-            font-size: 17px;
-            outline: none;
-            box-shadow: inset 0 0 var(--cyber-shadow-blur-sm) var(--cyber-neon-blue);
-            transition: all 0.3s ease;
-        }
-
-        #inputMessage::placeholder {
-            color: rgba(0,255,255,0.5);
-        }
-
-        body.light #inputMessage {
-            border-color: var(--light-border-color);
-            background-color: var(--light-panel-bg);
-            color: var(--light-text-color);
-            box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.05);
-        }
-
-        #inputMessage:focus {
-            border-color: var(--cyber-neon-magenta);
-            box-shadow: inset 0 0 var(--cyber-shadow-blur-md) var(--cyber-neon-magenta),
-                        0 0 var(--cyber-shadow-blur-md) var(--cyber-neon-magenta);
-            background-color: #1a0a1a;
-            color: var(--cyber-neon-magenta);
-        }
-
-        body.light #inputMessage:focus {
-            border-color: #808080;
-            box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
-            background-color: #f8f8f8;
-            color: var(--light-text-color);
-        }
-
-        #sendBtn {
-            padding: 15px 30px;
-            font-size: 17px;
-            border: 2px solid var(--cyber-neon-magenta);
-            border-radius: 30px;
-            background-color: var(--cyber-panel-bg);
-            color: var(--cyber-neon-magenta);
-            cursor: pointer;
-            text-transform: uppercase;
-            font-weight: bold;
-            letter-spacing: 1px;
-            box-shadow: 0 0 var(--cyber-shadow-blur-sm) var(--cyber-neon-magenta);
-            transition: all 0.3s ease;
-        }
-
-        body.light #sendBtn {
-            border-color: var(--light-border-color);
-            background-color: #e0e0e0;
-            color: var(--light-text-color);
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-
-        #sendBtn:hover {
-            background-color: var(--cyber-neon-magenta);
-            color: var(--cyber-text-light);
-            box-shadow: 0 0 var(--cyber-shadow-blur-md) var(--cyber-neon-magenta),
-                        0 0 var(--cyber-shadow-blur-lg) rgba(255,0,255,0.5);
-            transform: translateY(-2px) scale(1.03);
-        }
-
-        body.light #sendBtn:hover {
-            background-color: #d0d0d0;
-            color: var(--light-text-color);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-            transform: translateY(-1px) scale(1.01);
-        }
-
-        /* Theme Toggle Button specific styles */
-        #themeToggle {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: var(--cyber-panel-bg);
-            color: var(--cyber-neon-blue);
-            border: 2px solid var(--cyber-neon-blue);
-            border-radius: 50%;
-            width: 45px;
-            height: 45px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            cursor: pointer;
-            box-shadow: 0 0 10px var(--cyber-neon-blue);
-            transition: all 0.3s ease-in-out;
-            z-index: 10;
-        }
-
-        #themeToggle:hover {
-            background: var(--cyber-neon-blue);
-            color: var(--cyber-panel-bg);
-            box-shadow: 0 0 15px var(--cyber-neon-blue);
-            transform: scale(1.05);
-        }
-
-        body.light #themeToggle {
-            background: var(--light-panel-bg);
-            color: var(--light-text-color);
-            border-color: var(--light-border-color);
-            box-shadow: 0 2px 5px var(--light-shadow-color);
-        }
-
-        body.light #themeToggle:hover {
-            background: #e5e5e5;
-            color: #333;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-            transform: scale(1.05);
-        }
-
-
-        /* Responsive adjustments */
-        @media (max-width: 768px) {
-            body {
-                margin: 20px 10px;
-                padding: 15px;
-                max-width: unset;
-            }
-            h2 {
-                font-size: 26px;
-            }
-            .message {
-                max-width: 85%;
-            }
-            #inputMessage, #sendBtn {
-                padding: 12px;
-                font-size: 15px;
-            }
-            #themeToggle {
-                top: 15px;
-                right: 15px;
-                width: 40px;
-                height: 40px;
-                font-size: 20px;
-            }
-        }
-    </style>
-</head>
-<body>
-    <button id="themeToggle">🌙</button>
-    <h2>// RASA CORE // Initiating Protocol</h2>
-    <div id="chat"></div>
-
-    <form id="inputForm">
-        <input type="text" id="inputMessage" autocomplete="off" placeholder="Input command line..." required />
-        <button type="submit" id="sendBtn">EXECUTE</button>
-    </form>
-
-    <script>
-        const chat = document.getElementById('chat');
-        const form = document.getElementById('inputForm');
-        const input = document.getElementById('inputMessage');
-        const toggleBtn = document.getElementById("themeToggle");
-        const currentTheme = localStorage.getItem("theme");
-
-        // Apply theme on load
-        if (currentTheme === "light") {
-            document.body.classList.add("light");
-            toggleBtn.textContent = "☀️";
-        } else {
-            toggleBtn.textContent = "🌙";
-        }
-
-        // Theme toggle event listener
-        toggleBtn.addEventListener("click", () => {
-            document.body.classList.toggle("light");
-            const isLight = document.body.classList.contains("light");
-            localStorage.setItem("theme", isLight ? "light" : "dark");
-            toggleBtn.textContent = isLight ? "☀️" : "🌙";
-        });
-
-        // Function to add messages to the chat interface
-        function addMessage(text, sender) {
-            const div = document.createElement('div');
-            div.classList.add('message', sender);
-            div.textContent = text;
-            chat.appendChild(div);
-            chat.scrollTop = chat.scrollHeight;
-        }
-
-        // ... (rest of your existing JavaScript code) ...
-
-        async function sendMessage(message) {
-            addMessage(message, 'user'); // Display user's message immediately
-            input.value = ''; // Clear input field
-
-            try {
-                // You can add a slight delay here to simulate bot processing
-                // await new Promise(resolve => setTimeout(resolve, 300));
-
-                const response = await fetch('http://localhost:5005/webhooks/rest/webhook', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ message: message })
-                });
-
-                const data = await response.json();
-
-                if (data.length === 0) {
-                    addMessage("System error: Response data empty. Try again.", 'bot');
-                    return;
-                }
-
-                data.forEach(item => {
-                    if (item.text) {
-                        addMessage(item.text, 'bot');
-                    }
-                    if (item.image) {
-                        const img = document.createElement('img');
-                        img.src = item.image;
-                        img.style.maxWidth = '100%';
-                        img.style.borderRadius = '8px';
-                        img.style.marginTop = '10px';
-                        const imgDiv = document.createElement('div');
-                        imgDiv.classList.add('message', 'bot'); // You might want a specific class for image messages for styling
-                        imgDiv.appendChild(img);
-                        chat.appendChild(imgDiv);
-                        // No need to scroll here, the final scroll after the loop will cover it
-                    }
-                    
-                    // --- NEW BUTTONS LOGIC STARTS HERE ---
-                    if (item.buttons && item.buttons.length > 0) { // Check if buttons exist and array is not empty
-                        const buttonContainer = document.createElement('div'); // Create a container for buttons
-                        buttonContainer.classList.add('bot-buttons-container'); // Add a class for styling
-                        
-                        item.buttons.forEach(btn => {
-                            const button = document.createElement('button');
-                            button.classList.add('bot-button'); // Use a specific class for buttons, not 'message', 'bot'
-                            button.textContent = btn.title;
-                            button.onclick = () => sendMessage(btn.payload); // Send payload back to Rasa
-                            buttonContainer.appendChild(button);
-                        });
-                        chat.appendChild(buttonContainer); // Append the container with all buttons
-                    }
-                    // --- NEW BUTTONS LOGIC ENDS HERE ---
-                });
-
-                chat.scrollTop = chat.scrollHeight; // Scroll to the bottom after all items are added
-
-            } catch (error) {
-                addMessage('Connection terminated: Failed to reach Rasa server. Re-linking...', 'bot');
-                console.error("Rasa API connection error:", error);
-            }
-        }
-
-        // ... (rest of your existing JavaScript code) ...
-        // Event listener for form submission
-        form.addEventListener('submit', e => {
-            e.preventDefault();
-            const message = input.value.trim();
-            if (message) {
-                sendMessage(message);
-            }
-        });
-
-        // Initial bot greeting (optional)
-        window.addEventListener('load', () => {
-            addMessage("Initializing bot. State: Online. Awaiting command...", 'bot');
-        });
-    </script>
-</body>
-=======
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <title>Rasa Cyber-Matrix Chat</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-        /* Global Cyberpunk Variables for easy customization */
-        :root {
-            /* Dark Theme Colors (Default) */
-            --cyber-dark-bg: #0d0d0d; /* Deep dark background */
-            --cyber-panel-bg: #111;   /* Slightly lighter dark for panels */
-            --cyber-neon-blue: #00ffff; /* Primary neon blue */
-            --cyber-neon-magenta: #ff00ff; /* Primary neon magenta */
-            --cyber-user-gradient-start: #00ffff; /* User message gradient start */
-            --cyber-user-gradient-end: #0077ff;   /* User message gradient end */
-            --cyber-bot-gradient-start: #ff00ff; /* Bot message gradient start */
-            --cyber-bot-gradient-end: #ff0066;   /* Bot message gradient end */
-            --cyber-text-light: #fff; /* Light text color for contrast */
-            --cyber-text-dark: #000;  /* Dark text color for light backgrounds */
-            --cyber-shadow-blur-sm: 10px; /* Small shadow blur for general glow */
-            --cyber-shadow-blur-md: 15px; /* Medium shadow blur */
-            --cyber-shadow-blur-lg: 30px; /* Large shadow blur for intense glow */
-
-            /* Light Theme Colors (when .light class is active) */
-            --light-bg: #f0f0f0; /* Light background */
-            --light-panel-bg: #ffffff; /* White panel background */
-            --light-text-color: #333333; /* Dark text for light theme */
-            --light-border-color: #bbbbbb; /* Grey border for light theme */
-            --light-user-bg: #cfe2ff; /* Light blue for user message */
-            --light-bot-bg: #e2e3e5; /* Light grey for bot message */
-            --light-shadow-color: rgba(0, 0, 0, 0.1);
-        }
-
-        /* --- Base & Body Styles --- */
-        body {
-            font-family: 'Orbitron', sans-serif; /* Futuristic font */
-            background-color: var(--cyber-dark-bg);
-            color: var(--cyber-neon-blue); /* Default text color */
-            margin: 0 auto;
-            padding: 20px;
-            max-width: 650px;
             border: 2px solid var(--cyber-neon-blue);
             border-radius: 12px;
+            padding: 40px;
+            width: 400px;
+            max-width: 90vw;
             box-shadow: 0 0 var(--cyber-shadow-blur-md) var(--cyber-neon-blue),
                         0 0 var(--cyber-shadow-blur-lg) rgba(0,255,255,0.3);
-            position: relative;
-            overflow: hidden;
-            transition: all 0.3s ease-in-out;
+            animation: pulse-border 3s infinite alternate;
         }
 
-        /* Subtle background grid pattern */
-        body::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-image:
-                linear-gradient(0deg, transparent 97%, rgba(0,255,255,0.05) 97%),
-                linear-gradient(90deg, transparent 97%, rgba(0,255,255,0.05) 97%);
-            background-size: 25px 25px;
-            z-index: -1;
-            opacity: 0.15;
-            transition: opacity 0.3s ease-in-out;
+        @keyframes pulse-border {
+            from { 
+                border-color: var(--cyber-neon-blue);
+                box-shadow: 0 0 var(--cyber-shadow-blur-md) var(--cyber-neon-blue),
+                           0 0 var(--cyber-shadow-blur-lg) rgba(0,255,255,0.3);
+            }
+            to { 
+                border-color: var(--cyber-neon-magenta);
+                box-shadow: 0 0 var(--cyber-shadow-blur-md) var(--cyber-neon-magenta),
+                           0 0 var(--cyber-shadow-blur-lg) rgba(255,0,255,0.3);
+            }
         }
 
-        /* --- Light Theme Overrides --- */
-        body.light {
-            background-color: var(--light-bg);
-            color: var(--light-text-color);
-            border-color: var(--light-border-color);
-            box-shadow: 0 0 10px var(--light-shadow-color);
-        }
-
-        body.light::before {
-            opacity: 0.05;
-            background-image:
-                linear-gradient(0deg, transparent 97%, rgba(0,0,0,0.02) 97%),
-                linear-gradient(90deg, transparent 97%, rgba(0,0,0,0.02) 97%);
-        }
-
-        /* --- Heading Style --- */
         h2 {
             text-align: center;
             color: var(--cyber-neon-magenta);
             text-shadow: 0 0 var(--cyber-shadow-blur-md) var(--cyber-neon-magenta);
-            font-size: 32px;
-            margin-bottom: 25px;
+            font-size: 28px;
+            margin-bottom: 30px;
             letter-spacing: 3px;
             text-transform: uppercase;
-            animation: pulse-glow 2s infinite alternate;
-            transition: all 0.3s ease-in-out;
+            animation: title-glow 2s infinite alternate;
         }
 
-        @keyframes pulse-glow {
+        @keyframes title-glow {
             from { text-shadow: 0 0 8px var(--cyber-neon-magenta), 0 0 15px rgba(255,0,255,0.5); }
             to { text-shadow: 0 0 12px var(--cyber-neon-magenta), 0 0 25px rgba(255,0,255,0.7); }
         }
 
-        body.light h2 {
-            color: var(--light-text-color);
-            text-shadow: none;
-            animation: none;
+        .form-group {
+            margin-bottom: 25px;
         }
 
-
-        /* --- Chat Window --- */
-        #chat {
-            background-color: var(--cyber-panel-bg);
-            border: 2px solid var(--cyber-neon-blue);
-            border-radius: 10px;
-            padding: 20px;
-            height: 450px;
-            overflow-y: auto;
-            margin-bottom: 20px;
-            box-shadow: inset 0 0 var(--cyber-shadow-blur-sm) var(--cyber-neon-blue),
-                        inset 0 0 var(--cyber-shadow-blur-md) rgba(0,255,255,0.2);
-            /* *** CHANGE START *** */
-            display: flex;
-            flex-direction: column;
-            /* align-items: flex-start; /* Default for messages starting from left */
-            gap: 15px;
-            /* *** CHANGE END *** */
-            transition: all 0.3s ease-in-out;
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--cyber-neon-blue);
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
-        body.light #chat {
-            background-color: var(--light-panel-bg);
-            border-color: var(--light-border-color);
-            box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.05);
-        }
-
-        /* Custom Scrollbar Styles */
-        #chat::-webkit-scrollbar {
-            width: 10px;
-        }
-        #chat::-webkit-scrollbar-track {
-            background: var(--cyber-panel-bg);
-            border-radius: 10px;
-            transition: background 0.3s ease-in-out;
-        }
-        #chat::-webkit-scrollbar-thumb {
-            background: var(--cyber-neon-blue);
-            border-radius: 10px;
-            border: 2px solid var(--cyber-panel-bg);
-            transition: all 0.3s ease-in-out;
-        }
-        #chat::-webkit-scrollbar-thumb:hover {
-            background: var(--cyber-neon-magenta);
-            box-shadow: 0 0 5px var(--cyber-neon-magenta);
-        }
-
-        body.light #chat::-webkit-scrollbar-track {
-            background: var(--light-panel-bg);
-        }
-        body.light #chat::-webkit-scrollbar-thumb {
-            background: #a0a0a0;
-            border-color: var(--light-panel-bg);
-        }
-        body.light #chat::-webkit-scrollbar-thumb:hover {
-            background: #808080;
-            box-shadow: none;
-        }
-
-        /* --- Message Bubbles --- */
-        .message {
-            padding: 12px 20px;
-            border-radius: 25px;
-            max-width: 70%;
-            word-wrap: break-word;
-            /* *** CHANGE START *** */
-            /* Removed clear: both; and float: left/right; */
-            display: inline-flex; /* Changed from block to inline-flex to make it hug content */
-            align-items: center; /* Vertically center content if multi-line */
-            /* *** CHANGE END *** */
-            font-size: 16px;
-            line-height: 1.5;
-            animation: fadeInMessage 0.3s ease-out;
-            transition: all 0.3s ease-in-out;
-        }
-
-        @keyframes fadeInMessage {
-            from { opacity: 0; transform: translateY(15px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .user {
-            background: linear-gradient(135deg, var(--cyber-user-gradient-start), var(--cyber-user-gradient-end));
-            color: var(--cyber-text-dark);
-            /* *** CHANGE START *** */
-            margin-left: auto; /* Pushes element to the right when in a flex container */
-            /* Removed float: right; */
-            /* *** CHANGE END *** */
-            border-bottom-right-radius: 5px;
-            box-shadow: 0 0 var(--cyber-shadow-blur-sm) var(--cyber-neon-blue);
-        }
-
-        body.light .user {
-            background: var(--light-user-bg);
-            color: var(--light-text-color);
-            box-shadow: 0 2px 5px var(--light-shadow-color);
-        }
-
-        .bot {
-            background: linear-gradient(135deg, var(--cyber-bot-gradient-start), var(--cyber-bot-gradient-end));
-            color: var(--cyber-text-light);
-            /* *** CHANGE START *** */
-            margin-right: auto; /* Pushes element to the left when in a flex container */
-            /* Removed float: left; */
-            /* *** CHANGE END *** */
-            border-bottom-left-radius: 5px;
-            box-shadow: 0 0 var(--cyber-shadow-blur-sm) var(--cyber-neon-magenta),
-                        0 0 var(--cyber-shadow-blur-md) rgba(255,0,255,0.4);
-            animation: flicker 1.2s infinite alternate;
-        }
-
-        body.light .bot {
-            background: var(--light-bot-bg);
-            color: var(--light-text-color);
-            box-shadow: 0 2px 5px var(--light-shadow-color);
-            animation: none;
-        }
-
-        /* Flicker Animation for Bot Messages */
-        @keyframes flicker {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            20%, 80% { opacity: 0.95; transform: scale(0.99); }
-            40%, 60% { opacity: 1; transform: scale(1.01); }
-        }
-
-        /* --- Input Form --- */
-        #inputForm {
-            display: flex;
-            gap: 12px;
-        }
-
-        #inputMessage {
-            flex: 1;
+        input[type="text"], input[type="password"] {
+            width: 100%;
             padding: 15px;
-            border-radius: 30px;
             border: 2px solid var(--cyber-neon-blue);
+            border-radius: 8px;
             background-color: var(--cyber-panel-bg);
             color: var(--cyber-neon-blue);
-            font-size: 17px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 16px;
             outline: none;
-            box-shadow: inset 0 0 var(--cyber-shadow-blur-sm) var(--cyber-neon-blue);
+            box-shadow: inset 0 0 var(--cyber-shadow-blur-sm) rgba(0,255,255,0.2);
             transition: all 0.3s ease;
+            box-sizing: border-box;
         }
 
-        #inputMessage::placeholder {
+        input[type="text"]:focus, input[type="password"]:focus {
+            border-color: var(--cyber-neon-magenta);
+            box-shadow: inset 0 0 var(--cyber-shadow-blur-sm) rgba(255,0,255,0.3),
+                        0 0 var(--cyber-shadow-blur-md) var(--cyber-neon-magenta);
+            color: var(--cyber-neon-magenta);
+        }
+
+        input::placeholder {
             color: rgba(0,255,255,0.5);
         }
 
-        body.light #inputMessage {
-            border-color: var(--light-border-color);
-            background-color: var(--light-panel-bg);
-            color: var(--light-text-color);
-            box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.05);
-        }
-
-        #inputMessage:focus {
-            border-color: var(--cyber-neon-magenta);
-            box-shadow: inset 0 0 var(--cyber-shadow-blur-md) var(--cyber-neon-magenta),
-                        0 0 var(--cyber-shadow-blur-md) var(--cyber-neon-magenta);
-            background-color: #1a0a1a;
-            color: var(--cyber-neon-magenta);
-        }
-
-        body.light #inputMessage:focus {
-            border-color: #808080;
-            box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
-            background-color: #f8f8f8;
-            color: var(--light-text-color);
-        }
-
-        #sendBtn {
-            padding: 15px 30px;
-            font-size: 17px;
+        .login-btn {
+            width: 100%;
+            padding: 15px;
             border: 2px solid var(--cyber-neon-magenta);
-            border-radius: 30px;
+            border-radius: 8px;
             background-color: var(--cyber-panel-bg);
             color: var(--cyber-neon-magenta);
-            cursor: pointer;
-            text-transform: uppercase;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 18px;
             font-weight: bold;
-            letter-spacing: 1px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
             box-shadow: 0 0 var(--cyber-shadow-blur-sm) var(--cyber-neon-magenta);
             transition: all 0.3s ease;
         }
 
-        body.light #sendBtn {
-            border-color: var(--light-border-color);
-            background-color: #e0e0e0;
-            color: var(--light-text-color);
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-
-        #sendBtn:hover {
+        .login-btn:hover {
             background-color: var(--cyber-neon-magenta);
             color: var(--cyber-text-light);
             box-shadow: 0 0 var(--cyber-shadow-blur-md) var(--cyber-neon-magenta),
                         0 0 var(--cyber-shadow-blur-lg) rgba(255,0,255,0.5);
-            transform: translateY(-2px) scale(1.03);
+            transform: translateY(-2px);
         }
 
-        body.light #sendBtn:hover {
-            background-color: #d0d0d0;
-            color: var(--light-text-color);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-            transform: translateY(-1px) scale(1.01);
+        .error-message {
+            color: #ff4444;
+            text-align: center;
+            margin-top: 15px;
+            font-size: 14px;
+            text-shadow: 0 0 5px #ff4444;
+            display: none;
         }
 
-        /* Theme Toggle Button specific styles */
-        #themeToggle {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: var(--cyber-panel-bg);
+        .user-info {
+            margin-top: 30px;
+            padding: 20px;
+            border: 1px solid rgba(0,255,255,0.3);
+            border-radius: 8px;
+            background-color: rgba(0,255,255,0.05);
+        }
+
+        .user-info h3 {
             color: var(--cyber-neon-blue);
-            border: 2px solid var(--cyber-neon-blue);
-            border-radius: 50%;
-            width: 45px;
-            height: 45px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            cursor: pointer;
-            box-shadow: 0 0 10px var(--cyber-neon-blue);
-            transition: all 0.3s ease-in-out;
-            z-index: 10;
+            margin-top: 0;
+            font-size: 16px;
+            text-transform: uppercase;
         }
 
-        #themeToggle:hover {
-            background: var(--cyber-neon-blue);
-            color: var(--cyber-panel-bg);
-            box-shadow: 0 0 15px var(--cyber-neon-blue);
-            transform: scale(1.05);
+        .user-info p {
+            margin: 8px 0;
+            font-size: 14px;
+            color: rgba(0,255,255,0.8);
         }
 
-        body.light #themeToggle {
-            background: var(--light-panel-bg);
-            color: var(--light-text-color);
-            border-color: var(--light-border-color);
-            box-shadow: 0 2px 5px var(--light-shadow-color);
-        }
-
-        body.light #themeToggle:hover {
-            background: #e5e5e5;
-            color: #333;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-            transform: scale(1.05);
-        }
-
-
-        /* Responsive adjustments */
-        @media (max-width: 768px) {
-            body {
-                margin: 20px 10px;
-                padding: 15px;
-                max-width: unset;
+        @media (max-width: 480px) {
+            .login-container {
+                padding: 25px;
+                width: auto;
             }
             h2 {
-                font-size: 26px;
-            }
-            .message {
-                max-width: 85%;
-            }
-            #inputMessage, #sendBtn {
-                padding: 12px;
-                font-size: 15px;
-            }
-            #themeToggle {
-                top: 15px;
-                right: 15px;
-                width: 40px;
-                height: 40px;
-                font-size: 20px;
+                font-size: 24px;
             }
         }
     </style>
 </head>
 <body>
-    <button id="themeToggle">🌙</button>
-    <h2>// RASA CORE // Initiating Protocol</h2>
-    <div id="chat"></div>
+    <div class="login-container">
+        <h2>// Access Control //</h2>
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" placeholder="Enter username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" placeholder="Enter password" required>
+            </div>
+            <button type="submit" class="login-btn">Initialize Access</button>
+            <div class="error-message" id="errorMessage">
+                Access Denied: Invalid credentials
+            </div>
+        </form>
 
-    <form id="inputForm">
-        <input type="text" id="inputMessage" autocomplete="off" placeholder="Input command line..." required />
-        <button type="submit" id="sendBtn">EXECUTE</button>
-    </form>
+        <div class="user-info">
+            <h3>Valid Users</h3>
+            <p><strong>Username:</strong> putter | <strong>Password:</strong> 1234</p>
+            <p><strong>Username:</strong> prim | <strong>Password:</strong> abcd</p>
+        </div>
+    </div>
 
     <script>
-        const chat = document.getElementById('chat');
-        const form = document.getElementById('inputForm');
-        const input = document.getElementById('inputMessage');
-        const toggleBtn = document.getElementById("themeToggle");
-        const currentTheme = localStorage.getItem("theme");
+        const users = { 
+            "putter": "1234", 
+            "prim": "abcd" 
+        };
 
-        // Apply theme on load
-        if (currentTheme === "light") {
-            document.body.classList.add("light");
-            toggleBtn.textContent = "☀️";
-        } else {
-            toggleBtn.textContent = "🌙";
-        }
+        document.getElementById("loginForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            
+            const username = document.getElementById("username").value.trim();
+            const password = document.getElementById("password").value;
+            const errorMessage = document.getElementById("errorMessage");
 
-        // Theme toggle event listener
-        toggleBtn.addEventListener("click", () => {
-            document.body.classList.toggle("light");
-            const isLight = document.body.classList.contains("light");
-            localStorage.setItem("theme", isLight ? "light" : "dark");
-            toggleBtn.textContent = isLight ? "☀️" : "🌙";
-        });
-
-        // Function to add messages to the chat interface
-        function addMessage(text, sender) {
-            const div = document.createElement('div');
-            div.classList.add('message', sender);
-            div.textContent = text;
-            chat.appendChild(div);
-            chat.scrollTop = chat.scrollHeight;
-        }
-
-        // ... (rest of your existing JavaScript code) ...
-
-        async function sendMessage(message) {
-            addMessage(message, 'user'); // Display user's message immediately
-            input.value = ''; // Clear input field
-
-            try {
-                // You can add a slight delay here to simulate bot processing
-                // await new Promise(resolve => setTimeout(resolve, 300));
-
-                const response = await fetch('http://localhost:5005/webhooks/rest/webhook', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ message: message })
-                });
-
-                const data = await response.json();
-
-                if (data.length === 0) {
-                    addMessage("System error: Response data empty. Try again.", 'bot');
-                    return;
-                }
-
-                data.forEach(item => {
-                    if (item.text) {
-                        addMessage(item.text, 'bot');
-                    }
-                    if (item.image) {
-                        const img = document.createElement('img');
-                        img.src = item.image;
-                        img.style.maxWidth = '100%';
-                        img.style.borderRadius = '8px';
-                        img.style.marginTop = '10px';
-                        const imgDiv = document.createElement('div');
-                        imgDiv.classList.add('message', 'bot'); // You might want a specific class for image messages for styling
-                        imgDiv.appendChild(img);
-                        chat.appendChild(imgDiv);
-                        // No need to scroll here, the final scroll after the loop will cover it
-                    }
-                    
-                    // --- NEW BUTTONS LOGIC STARTS HERE ---
-                    if (item.buttons && item.buttons.length > 0) { // Check if buttons exist and array is not empty
-                        const buttonContainer = document.createElement('div'); // Create a container for buttons
-                        buttonContainer.classList.add('bot-buttons-container'); // Add a class for styling
-                        
-                        item.buttons.forEach(btn => {
-                            const button = document.createElement('button');
-                            button.classList.add('bot-button'); // Use a specific class for buttons, not 'message', 'bot'
-                            button.textContent = btn.title;
-                            button.onclick = () => sendMessage(btn.payload); // Send payload back to Rasa
-                            buttonContainer.appendChild(button);
-                        });
-                        chat.appendChild(buttonContainer); // Append the container with all buttons
-                    }
-                    // --- NEW BUTTONS LOGIC ENDS HERE ---
-                });
-
-                chat.scrollTop = chat.scrollHeight; // Scroll to the bottom after all items are added
-
-            } catch (error) {
-                addMessage('Connection terminated: Failed to reach Rasa server. Re-linking...', 'bot');
-                console.error("Rasa API connection error:", error);
-            }
-        }
-
-        // ... (rest of your existing JavaScript code) ...
-        // Event listener for form submission
-        form.addEventListener('submit', e => {
-            e.preventDefault();
-            const message = input.value.trim();
-            if (message) {
-                sendMessage(message);
+            if (users[username] === password) {
+                // Success animation
+                const loginBtn = document.querySelector('.login-btn');
+                loginBtn.textContent = 'ACCESS GRANTED';
+                loginBtn.style.backgroundColor = '#00ff00';
+                loginBtn.style.borderColor = '#00ff00';
+                loginBtn.style.color = '#000';
+                
+                setTimeout(() => {
+                    window.location.href = "dashboard.html";
+                }, 1500);
+            } else {
+                // Show error
+                errorMessage.style.display = 'block';
+                
+                // Shake animation for error
+                const container = document.querySelector('.login-container');
+                container.style.animation = 'shake 0.5s ease-in-out';
+                
+                setTimeout(() => {
+                    container.style.animation = 'pulse-border 3s infinite alternate';
+                    errorMessage.style.display = 'none';
+                }, 2000);
+                
+                // Clear password field
+                document.getElementById("password").value = '';
             }
         });
 
-        // Initial bot greeting (optional)
-        window.addEventListener('load', () => {
-            addMessage("Initializing bot. State: Online. Awaiting command...", 'bot');
-        });
+        // Add shake animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes shake {
+                0%, 100% { transform: translateX(0); }
+                25% { transform: translateX(-5px); }
+                75% { transform: translateX(5px); }
+            }
+        `;
+        document.head.appendChild(style);
     </script>
 </body>
->>>>>>> 62318566ae66745874f84779183feebdf18800dd
 </html>
