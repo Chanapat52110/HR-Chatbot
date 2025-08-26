@@ -501,6 +501,9 @@
             input.value = ''; // Clear input field
 
             try {
+                // Replace with your deployed Rasa server URL
+                // For local testing: 'http://localhost:5005/webhooks/rest/webhook'
+                // For deployed: 'https://your-app.onrender.com/webhooks/rest/webhook'
                 const response = await fetch('http://localhost:5005/webhooks/rest/webhook', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
