@@ -463,4 +463,110 @@
         <a href="index.html" class="logout-btn">Logout</a>
     </div>
     
-    <div i
+    <div id="chat"></div>
+
+    <form id="inputForm">
+        <input type="text" id="inputMessage" autocomplete="off" placeholder="Input command line..." required />
+        <button type="submit" id="sendBtn">EXECUTE</button>
+    </form>
+
+    <script>
+        const chat = document.getElementById('chat');
+        const form = document.getElementById('inputForm');
+        const input = document.getElementById('inputMessage');
+        const toggleBtn = document.getElementById("themeToggle");
+        
+        // Theme handling - using JavaScript variables instead of localStorage
+        let currentTheme = "dark";
+
+        // Theme toggle event listener
+        toggleBtn.addEventListener("click", () => {
+            document.body.classList.toggle("light");
+            const isLight = document.body.classList.contains("light");
+            currentTheme = isLight ? "light" : "dark";
+            toggleBtn.textContent = isLight ? "☀️" : "🌙";
+        });
+
+        // Function to add messages to the chat interface
+        function addMessage(text, sender) {
+            const div = document.createElement('div');
+            div.classList.add('message', sender);
+            div.textContent = text;
+            chat.appendChild(div);
+            chat.scrollTop = chat.scrollHeight;
+        }
+
+        async function sendMessage(message) {
+            addMessage(message, 'user'); // Display user's message immediately
+            input.value = ''; // Clear input field
+
+            try {
+                const response = await fetch('http://localhost:5005/webhooks/rest/webhook', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ message: message })
+                });
+
+                const data = await response.json();
+
+                if (data.length === 0) {
+                    addMessage("System error: Response data empty. Try again.", 'bot');
+                    return;
+                }
+
+                data.forEach(item => {
+                    if (item.text) {
+                        addMessage(item.text, 'bot');
+                    }
+                    if (item.image) {
+                        const img = document.createElement('img');
+                        img.src = item.image;
+                        img.style.maxWidth = '100%';
+                        img.style.borderRadius = '8px';
+                        img.style.marginTop = '10px';
+                        const imgDiv = document.createElement('div');
+                        imgDiv.classList.add('message', 'bot');
+                        imgDiv.appendChild(img);
+                        chat.appendChild(imgDiv);
+                    }
+                    
+                    // Handle buttons from Rasa responses
+                    if (item.buttons && item.buttons.length > 0) {
+                        const buttonContainer = document.createElement('div');
+                        buttonContainer.classList.add('bot-buttons-container');
+                        
+                        item.buttons.forEach(btn => {
+                            const button = document.createElement('button');
+                            button.classList.add('bot-button');
+                            button.textContent = btn.title;
+                            button.onclick = () => sendMessage(btn.payload);
+                            buttonContainer.appendChild(button);
+                        });
+                        chat.appendChild(buttonContainer);
+                    }
+                });
+
+                chat.scrollTop = chat.scrollHeight;
+
+            } catch (error) {
+                addMessage('Connection terminated: Failed to reach Rasa server. Re-linking...', 'bot');
+                console.error("Rasa API connection error:", error);
+            }
+        }
+
+        // Event listener for form submission
+        form.addEventListener('submit', e => {
+            e.preventDefault();
+            const message = input.value.trim();
+            if (message) {
+                sendMessage(message);
+            }
+        });
+
+        // Initial bot greeting
+        window.addEventListener('load', () => {
+            addMessage("System initialized. Authentication verified. Awaiting command...", 'bot');
+        });
+    </script>
+</body>
+</html>
