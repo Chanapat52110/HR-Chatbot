@@ -1,0 +1,85 @@
+version: "3.1"
+
+rules:
+  # Previous rules...
+  - rule: Greet user
+    steps:
+      - intent: greet
+      - action: action_detect_and_respond_multilang
+
+  - rule: Respond to working hours FAQ
+    steps:
+      - intent: faq_working_hours
+      - action: action_detect_and_respond_multilang
+
+  # ... (other existing rules)
+
+  - rule: Respond to lunch break FAQ
+    steps:
+      - intent: faq_lunch_break
+      - action: action_detect_and_respond_multilang
+
+  - rule: Respond to missed fingerprint FAQ
+    steps:
+      - intent: faq_fingerprint_missed
+      - action: action_detect_and_respond_multilang
+
+  - rule: Respond to OT cutoff FAQ
+    steps:
+      - intent: faq_ot_cutoff
+      - action: action_detect_and_respond_multilang
+
+  - rule: Respond to dress code FAQ
+    steps:
+      - intent: faq_dress_code
+      - action: action_detect_and_respond_multilang
+
+  - rule: Respond to leave channels FAQ
+    steps:
+      - intent: faq_leave_channels
+      - action: action_detect_and_respond_multilang
+
+  - rule: Respond to leave notice period FAQ
+    steps:
+      - intent: faq_leave_notice_period
+      - action: action_detect_and_respond_multilang
+
+  - rule: Respond to annual holidays FAQ
+    steps:
+      - intent: faq_annual_holidays
+      - action: action_detect_and_respond_multilang
+
+  - rule: Respond to job application documents FAQ
+    steps:
+      - intent: faq_job_application_documents
+      - action: action_detect_and_respond_multilang
+
+  - rule: Respond to leave form download FAQ
+    steps:
+      - intent: faq_leave_form_download
+      - action: action_detect_and_respond_multilang
+
+  - rule: Respond to OT approval process FAQ
+    steps:
+      - intent: faq_ot_approval_process
+      - action: action_detect_and_respond_multilang
+
+  - rule: Handle bot challenge
+    steps:
+      - intent: bot_challenge
+      - action: action_detect_and_respond_multilang
+
+  - rule: Handle positive mood
+    steps:
+      - intent: mood_great
+      - action: action_detect_and_respond_multilang
+
+  - rule: Handle negative mood
+    steps:
+      - intent: mood_unhappy
+      - action: action_detect_and_respond_multilang
+
+  - rule: Handle goodbye
+    steps:
+      - intent: goodbye
+      - action: action_detect_and_respond_multilang

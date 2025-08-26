@@ -1,0 +1,40 @@
+version: "3.1"
+
+stories:
+- story: English FAQ conversation
+  steps:
+    - intent: greet
+    - action: action_detect_and_respond_multilang
+    - intent: faq_working_hours
+    - action: action_detect_and_respond_multilang
+    - intent: goodbye
+    - action: action_detect_and_respond_multilang
+
+- story: Thai FAQ conversation
+  steps:
+    - intent: greet
+    - action: action_detect_and_respond_multilang
+    - intent: faq_salary_pay_date
+    - action: action_detect_and_respond_multilang
+    - intent: goodbye
+    - action: action_detect_and_respond_multilang
+
+- story: Japanese FAQ conversation
+  steps:
+    - intent: greet
+    - action: action_detect_and_respond_multilang
+    - intent: faq_hr_contact
+    - action: action_detect_and_respond_multilang
+    - intent: goodbye
+    - action: action_detect_and_respond_multilang
+
+- story: Mixed language conversation
+  steps:
+    - intent: greet
+    - action: action_detect_and_respond_multilang
+    - intent: faq_working_hours
+    - action: action_detect_and_respond_multilang
+    - intent: faq_benefits_info
+    - action: action_detect_and_respond_multilang
+    - intent: goodbye
+    - action: action_detect_and_respond_multilang

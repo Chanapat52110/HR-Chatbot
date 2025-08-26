@@ -1,0 +1,37 @@
+version: "3.1"
+
+intents:
+  - greet
+  - goodbye
+  - affirm
+  - deny
+  - mood_great
+  - mood_unhappy
+  - bot_challenge
+  - faq_working_hours
+  - faq_leave_policy
+  - faq_salary_pay_date
+  - faq_benefits_info
+  - faq_hr_contact
+  - faq_lunch_break
+  - faq_fingerprint_missed
+  - faq_ot_cutoff
+  - faq_dress_code
+  - faq_leave_channels
+  - faq_leave_notice_period
+  - faq_annual_holidays
+  - faq_job_application_documents
+  - faq_leave_form_download
+  - faq_ot_approval_process
+
+actions:
+  - action_detect_and_respond_multilang
+  - action_default_fallback # เพิ่ม action_default_fallback เข้าไปใน actions
+
+responses:
+  utter_default:
+    - text: "ขอโทษ ฉันไม่แน่ใจว่าคุณหมายถึงอะไรค่ะ คุณหมายถึงคำถามเหล่านี้หรือเปล่า?" # เพิ่ม utter_default response
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: false

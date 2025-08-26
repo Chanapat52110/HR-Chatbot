@@ -1,0 +1,92 @@
+{
+  "faq_working_hours": {
+    "EN": "Our working hours are Monday–Friday, 08:00 to 17:00. Lunch break is from 12:00 to 13:00.",
+    "TH": "เวลาเปิดโรงงานคือวันจันทร์ถึงศุกร์ 06:00 - 18:00 น.",
+    "JA": "勤務時間は月曜から金曜の6:00〜18:00です。"
+  },
+  "faq_salary_pay_date": {
+    "EN": "Salaries are paid on the 25th. If that’s a holiday, payment is made on the last working day before.",
+    "TH": "จ่ายเงินเดือนวันที่ 25 ของทุกเดือน ถ้าตรงวันหยุดจะเลื่อนมาจ่ายก่อนหน้านั้นค่ะ",
+    "JA": "給与は毎月25日に支給されます。休日の場合は前営業日に支払います。"
+  },
+  "faq_hr_contact": {
+    "EN": "Contact HR at hr@yourcompany.com or call 1234 during office hours.",
+    "TH": "ติดต่อฝ่ายบุคคลได้ที่ hr@yourcompany.com หรือโทร 1234",
+    "JA": "人事部には hr@yourcompany.com または内線1234 で連絡できます。"
+  },
+  "faq_leave_policy": {
+    "EN": "For leave policy details, check section 4 of the Employee Handbook or contact HR.",
+    "TH": "ดูนโยบายการลาได้ในคู่มือพนักงาน หมวดที่ 4 หรือสอบถามฝ่ายบุคคลค่ะ",
+    "JA": "休暇ポリシーは従業員ハンドブック第4章をご覧ください。"
+  },
+  "faq_benefits_info": {
+    "EN": "Employee benefits info is available on the intranet or from HR.",
+    "TH": "สามารถดูข้อมูลสวัสดิการได้จากอินทราเน็ต หรือสอบถาม HR โดยตรงค่ะ",
+    "JA": "福利厚生情報はイントラネットまたは人事部から入手できます。"
+  },
+  "greet": {
+    "EN": "Hello! How can I help you with HR today?",
+    "TH": "สวัสดีค่ะ ต้องการความช่วยเหลือด้าน HR อะไรคะ?",
+    "JA": "こんにちは！人事に関するご用件は何でしょうか？"
+  },
+  "goodbye": {
+    "EN": "Goodbye! Have a great day.",
+    "TH": "ลาก่อนค่ะ ขอให้เป็นวันที่ดีนะคะ",
+    "JA": "さようなら、良い一日を。"
+  },
+  "bot_challenge": {
+    "EN": "I'm your AI HR assistant. Ask me anything HR-related!",
+    "TH": "ฉันคือผู้ช่วย AI ฝ่ายบุคคลของคุณ ถามมาได้เลย!",
+    "JA": "私は人事をサポートするAIアシスタントです。"
+  },
+  "faq_lunch_break": {
+    "EN": "Lunch break times are divided by shift: 11:30–12:30 and 12:30–13:30.",
+    "TH": "ช่วงพักกลางวันแบ่งตามกะ โดยมีช่วงเวลา 11:30–12:30 และ 12:30–13:30 ค่ะ",
+    "JA": "昼休みはシフトによって分かれています。11:30〜12:30 または 12:30〜13:30 です。"
+  },
+  "faq_fingerprint_missed": {
+    "EN": "If you forget to scan your fingerprint, notify your supervisor and have them confirm your attendance with HR.",
+    "TH": "หากลืมสแกนนิ้ว ให้แจ้งหัวหน้างานและให้หัวหน้าแผนกยืนยันการเข้างานกับฝ่ายบุคคลค่ะ",
+    "JA": "指紋認証を忘れた場合は、上司に報告し、人事部に出勤の確認を依頼してください。"
+  },
+  "faq_ot_cutoff": {
+    "EN": "OT cut-off is on the 25th of each month for payroll calculation.",
+    "TH": "ตัดโอทีทุกวันที่ 25 ของเดือนเพื่อคำนวณเงินเดือนค่ะ",
+    "JA": "残業の締め日は毎月25日です。"
+  },
+  "faq_dress_code": {
+    "EN": "Factory staff must wear modest clothing according to ISO rules. Office staff wear uniforms; on Mondays, wear yellow.",
+    "TH": "พนักงานในสายการผลิตต้องแต่งกายมิดชิดตามข้อกำหนด ISO ส่วนพนักงานออฟฟิศใส่ยูนิฟอร์ม วันจันทร์ใส่ชุดสีเหลืองค่ะ",
+    "JA": "工場の従業員はISO基準に従った服装をし、オフィスの従業員は制服を着用します。月曜日は黄色い服を着ます。"
+  },
+  "faq_leave_channels": {
+    "EN": "You can request leave via the online system, HR forms, or directly through your supervisor.",
+    "TH": "สามารถขอลางานได้ทางระบบออนไลน์ กรอกแบบฟอร์ม HR หรือแจ้งผ่านหัวหน้างานโดยตรงค่ะ",
+    "JA": "オンラインシステム、人事部の用紙、または上司を通じて休暇を申請できます。"
+  },
+  "faq_leave_notice_period": {
+    "EN": "Please submit your leave request at least 7 days in advance.",
+    "TH": "การลางานต้องแจ้งล่วงหน้าอย่างน้อย 7 วัน หรือ 1 สัปดาห์ค่ะ",
+    "JA": "休暇の申請は少なくとも7日前に行ってください。"
+  },
+  "faq_annual_holidays": {
+    "EN": "The company holidays follow the official calendar. Please see the HR annual holiday schedule.",
+    "TH": "วันหยุดประจำปีเป็นไปตามปฏิทินทางราชการ สามารถดูตารางวันหยุดได้ที่บอร์ดฝ่ายบุคคลค่ะ",
+    "JA": "年間休日は公式カレンダーに従います。人事部の年間休日表をご確認ください。"
+  },
+  "faq_job_application_documents": {
+    "EN": "You’ll need a copy of your ID card, house registration, and a medical certificate.",
+    "TH": "เอกสารที่ใช้สมัครงานคือ บัตรประชาชน สำเนาทะเบียนบ้าน และใบรับรองแพทย์ค่ะ",
+    "JA": "応募に必要な書類は、身分証明書のコピー、住民票のコピー、健康診断書です。"
+  },
+  "faq_leave_form_download": {
+    "EN": "You can download the leave form from our Google Drive link and submit it to HR after getting your supervisor’s approval.",
+    "TH": "สามารถโหลดใบลาจากลิงก์ Google Drive และส่งให้หัวหน้าเซ็นรับรองก่อนส่งที่ห้อง HR ค่ะ",
+    "JA": "Googleドライブのリンクから休暇申請書をダウンロードし、上司の承認を得て人事部に提出してください。"
+  },
+  "faq_ot_approval_process": {
+    "EN": "To request OT, get the form approved by your supervisor and submit it to the HR office.",
+    "TH": "ขออนุมัติ OT โดยรับแบบฟอร์มจากหัวหน้า ยืนยันแล้วนำส่งที่ห้อง HR ค่ะ",
+    "JA": "残業を申請するには、上司の承認を得てから人事部に提出してください。"
+  }
+}
